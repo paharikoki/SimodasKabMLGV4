@@ -57,7 +57,7 @@
                                     <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v1" data-bs-toggle="tooltip" data-bs-title="Lihat BAST PNS 4 TTD">V1</a>
                                     <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v2" data-bs-toggle="tooltip" data-bs-title="Lihat BAST PNS 3 TTD">V2</a>
                                     <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v3" data-bs-toggle="tooltip" data-bs-title="Lihat BAST P3K 4 TTD">V3</a>
-                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v4" data-bs-toggle="tooltip" data-bs-title="Lihat BAST P3k 3 TTD">V4</a>
+                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v4" data-bs-toggle="tooltip" data-bs-title="Lihat BAST P3K 3 TTD">V4</a>
                                 </td>
                                 <td>
                                     <a class="button-warning" href="/bast/{{ $dist->id }}/edit" data-bs-toggle="tooltip" data-bs-title="Update BAST"><i class="fa fa-pencil" aria-hidden="true"></i></a>
