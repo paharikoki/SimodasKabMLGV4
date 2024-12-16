@@ -26,7 +26,7 @@
                         <a class="button-primary mt-2" href="/bast/trash-bast">Sampah BAST</a>
                     </div>
                   </div>
-    
+
             </div>
         </div>
     </div>
@@ -47,17 +47,17 @@
                         <th>Bidang</th>
                         <th>Sub Bag.Keuangan & Aset</th>
                         <th>Pengurus Barang Pengguna</th>
-                        
+
                     </tr>
                 </thead >
                 <tbody >
                         @foreach ($distributions as $dist)
                             <tr>
                                 <td>
-                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v1" data-bs-toggle="tooltip" data-bs-title="Lihat BAST Versi 1">V1</a>
-                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v2" data-bs-toggle="tooltip" data-bs-title="Lihat BAST Versi 2">V2</a>
-                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v3" data-bs-toggle="tooltip" data-bs-title="Lihat BAST Versi 3">V3</a>
-                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v4" data-bs-toggle="tooltip" data-bs-title="Lihat BAST Versi 4">V4</a>
+                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v1" data-bs-toggle="tooltip" data-bs-title="Lihat BAST PNS 4 TTD">V1</a>
+                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v2" data-bs-toggle="tooltip" data-bs-title="Lihat BAST PNS 3 TTD">V2</a>
+                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v3" data-bs-toggle="tooltip" data-bs-title="Lihat BAST P3K 4 TTD">V3</a>
+                                    <a class="button-primary" href="/bast/{{ $dist->id}}/generate-pdf-v4" data-bs-toggle="tooltip" data-bs-title="Lihat BAST P3k 3 TTD">V4</a>
                                 </td>
                                 <td>
                                     <a class="button-warning" href="/bast/{{ $dist->id }}/edit" data-bs-toggle="tooltip" data-bs-title="Update BAST"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -92,7 +92,7 @@
                                     @endphp
                                     @foreach ($dist->assets as $asset)
                                         @if ($i++ < $dist->assets->count())
-                                            {{ $asset->registration }}, 
+                                            {{ $asset->registration }},
                                         @else
                                             {{ $asset->registration }}
                                         @endif
@@ -103,7 +103,7 @@
                                 <td>{{ $dist->field }}</td>
                                 <td>{{ $dist->financeasset->name }}</td>
                                 <td>{{ $dist->itemmanager->name }}</td>
-                                
+
                             </tr>
                         @endforeach
                 </tbody>
@@ -115,14 +115,14 @@
 @endsection
 
 @section('content-delivery-js')
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="{{ asset('/js/table.js') }}"></script>
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))    
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
 
 @endsection

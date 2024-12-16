@@ -12,6 +12,17 @@
     <link rel="stylesheet" href="{{ asset('css/login-style.css') }}">
     <title>Details Asset</title>
     <link rel="icon" href="{{ asset('assets/img/logo-pemkab.svg') }}">
+    <style>
+        .label-text {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .input-text {
+            font-size: 21px;
+            font-weight: bold;
+            pointer-events: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,32 +58,32 @@
                         <h3 class="second-typography">DINAS KOMUNIKASI DAN INFORMATIKA </h3>
                         <h5 class="text-light mb-4">KABUPATEN MALANG</h5>
                         <div class="mb-2">
-                            <label for="item_name" class="form-label">Nama Barang</label>
-                            <input type="text" class="form-control"  id="item_name" value="{{ $asset->item_name }}"  readonly>
+                            <label for="item_name" class="form-label label-text">Nama Barang</label>
+                            <input type="text" class="form-control input-text"  id="item_name" value="{{ $asset->item_name }}"  readonly>
                         </div>
                         <div class="mb-2">
-                            <label for="brand" class="form-label">Type/Merk</label>
-                            <input type="text" class="form-control" id="brand" value="{{ $asset->brand }}" readonly>
+                            <label for="brand" class="form-label label-text">Type/Merk</label>
+                            <input type="text" class="form-control input-text" id="brand" value="{{ $asset->brand }}" readonly>
                         </div>
                         <div class="mb-2">
-                            <label for="how_to_earn" class="form-label">Asal Barang/Cara Perolehan</label>
-                            <input type="text" class="form-control" id="how_to_earn" value="{{ $asset->how_to_earn }}"  readonly>
+                            <label for="how_to_earn" class="form-label label-text">Asal Barang/Cara Perolehan</label>
+                            <input type="text" class="form-control input-text" id="how_to_earn" value="{{ $asset->how_to_earn }}"  readonly>
                         </div>
                         <div class="mb-2">
-                            <label for="item_year" class="form-label">Tahun Barang</label>
-                            <input type="text" class="form-control" id="item_year" value="{{ $asset->item_year }}" readonly>
+                            <label for="item_year" class="form-label label-text">Tahun Barang</label>
+                            <input type="text" class="form-control input-text" id="item_year" value="{{ $asset->item_year }}" readonly>
                         </div>
                         <div class="mb-2">
-                            <label for="item_code" class="form-label">Kode Barang</label>
-                            <input type="text" class="form-control" id="item_code" value="{{ $asset->item_code }}" readonly>
+                            <label for="item_code" class="form-label label-text">Kode Barang</label>
+                            <input type="text" class="form-control input-text" id="item_code" value="{{ $asset->item_code }}" readonly>
                         </div>
                         <div class="mb-2">
-                            <label for="registration" class="form-label">Kode Registrasi</label>
-                            <input type="text" class="form-control" id="registration" value="{{ $asset->registration }}" readonly>
+                            <label for="registration" class="form-label label-text">Kode Registrasi</label>
+                            <input type="text" class="form-control input-text" id="registration" value="{{ $asset->registration }}" readonly>
                         </div>
                         <div class="mb-2">
-                            <label for="nibar" class="form-label">Nibar</label>
-                            <input type="text" class="form-control" id="nibar" value="{{ $asset->nibar }}" readonly>
+                            <label for="nibar" class="form-label label-text">Nibar</label>
+                            <input type="text" class="form-control input-text" id="nibar" value="{{ $asset->nibar }}" readonly>
                         </div>
                     </form>
                 </div>
