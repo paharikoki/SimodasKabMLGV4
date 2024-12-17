@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     width: auto;
-    height: 260px;
+    height: 280px;
     background-color: var(--abu);
     color: black;
     border-radius: 3px;
@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: start;
     width: 900px;
-    height: 240px;
+    height: 260px;
     /* background-color: aqua; */
     border: 3px solid black;
     padding: 15px 5px 0 5px;
@@ -58,8 +58,8 @@
     align-items: center;
     justify-content: center;
     width: 180px;
-    height: 240px;
-    margin: -37px 0 0 -10px;
+    height: 260px;
+    margin: -18px 0 0 -10px;
     background-color: var(--white);
     border: 2px  solid black;
 
@@ -119,6 +119,28 @@
     font-size: 18px;
     border-radius: 10px;
 }
+.container .row .box-desc .asset-details{
+    margin: 0px 15px 0px 15px;
+    display: flex;
+    align-items: flex-start;
+    padding: 5px 0 ;
+    word-break: normal;
+    font-size: 18px;
+    border-radius: 10px;
+}
+.container .row .box-desc .asset-details tr td{
+    vertical-align: top;
+    padding: 2px;
+}
+.container .row .box-desc .asset-details td:first-child {
+    width: 30%;
+    text-align: left;
+}
+.container .row .box-desc .asset-details td:last-child {
+    font-weight: bold;
+    width: 70%;
+}
+
 .container .row .box-desc .desc span{
     font-size: 1.2rem;
     font-weight: 500;

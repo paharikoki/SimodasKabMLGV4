@@ -36,6 +36,29 @@
                                 <b class="head">DINAS KOMUNIKASI DAN INFORMATIKA <br>KABUPATEN MALANG</b>
                             </div>
                             <div class="label-text">
+                                <table class="asset-details" >
+                                    <tr>
+                                        <td>Nama Barang</td>
+                                        <td>:</td>
+                                        <td>{{ $asset->item_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Merk/Brand</td>
+                                        <td>:</td>
+                                        <td>{{ $asset->brand }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anggaran</td>
+                                        <td>:</td>
+                                        <td>{{ $asset->item_year }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kode Reg</td>
+                                        <td>:</td>
+                                        <td>{{ $asset->registration }}</td>
+                                    </tr>
+                                </table>
+{{--
                                 <div class="desc">
                                     <b>
                                         Nama Barang :<span> {{ $asset->item_name }}</span>
@@ -55,7 +78,7 @@
                                     <b>
                                         Kode Reg :<span> {{ $asset->registration }}</span>
                                     </b>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
