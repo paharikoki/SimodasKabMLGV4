@@ -54,10 +54,10 @@ Route::group(['middleware' => ['auth', 'BackButton']], function(){
 
 
     Route::get('/asset-management', [AssetController::class, 'index']);
-    Route::get('/asset-management/show-image/{id}', [AssetController::class, 'show']);
+    Route::get('/asset-management/show-image/{id}', [AssetController::class, 'show'])->name('asset-management.show-image');
     Route::get('/asset-management/show-file/{id}', [AssetController::class, 'showFile']);
-    Route::get('/asset-management/show-bast/{id}', [AssetController::class, 'showBast']);
-    Route::get('/asset-management/label/{id}', [AssetController::class, 'generateLabel']);
+    Route::get('/asset-management/show-bast/{id}', [AssetController::class, 'showBast'])->name('asset-management.show-bast');
+    Route::get('/asset-management/label/{id}', [AssetController::class, 'generateLabel'])->name('asset-management.label');
     Route::post('/asset-management/export-data', [AssetController::class, 'assetExportExcel']);
     Route::post('/asset-management/export-data-pdf', [AssetController::class, 'assetExportPDF']);
 
@@ -83,12 +83,14 @@ Route::group(['middleware' => ['auth', 'BackButton']], function(){
     Route::delete('/bsat/{id}', [DistributionController::class, 'destroy']);
 
 
-    Route::delete('/asset-management/{id}', [AssetController::class, 'destroy']);
+    Route::delete('/asset-management/{id}', [AssetController::class, 'destroy'])->name('asset-management.destroy');
     Route::get('/asset-management/add-asset-data', [AssetController::class, 'create']);
     Route::post('/asset-management/add-asset-data', [AssetController::class, 'store']);
-    Route::get('/asset-management/{id}/edit', [AssetController::class, 'edit']);
+    Route::get('/asset-management/{id}/edit', [AssetController::class, 'edit'])->name('asset-management.edit');
     Route::put('/asset-management/{id}/edit', [AssetController::class, 'update']);
     Route::post('/asset-management/import-data', [AssetController::class, 'assetImport']);
+    // AJAX DataTables
+    Route::get('/asset-management/tangible-assets', [AssetController::class, 'tangibleAssets'])->name('asset-management.tangible-assets');
 
 
     Route::get('/employee-list/add-employee-data', [EmployeeController::class, 'create']);

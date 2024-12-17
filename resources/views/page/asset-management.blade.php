@@ -102,7 +102,7 @@
                                 <option value="{{ $item }}">{{ $item }}</option>
                             @endforeach
                         </select>
-                       
+
                     </div>
                     <div class="wrap-input ms-2">
                         <label for="end_year">Sampai Tahun</label>
@@ -150,7 +150,7 @@
                     <select name="user" id="user">
                         <option value="">-</option>
                         @foreach ($employees as $employee)
-                            
+
                         <option value="{{$employee->name}}">{{$employee->name}}</option>
                         @endforeach
                     </select>
@@ -163,7 +163,7 @@
                                 <option value="{{ $item }}">{{ $item }}</option>
                             @endforeach
                         </select>
-                       
+
                     </div>
                     <div class="wrap-input ms-2">
                         <label for="end_year">Sampai Tahun</label>
@@ -211,7 +211,7 @@
                                 <option value="{{ $item }}">{{ $item }}</option>
                             @endforeach
                         </select>
-                       
+
                     </div>
                     <div class="wrap-input ms-2">
                         <label for="end_year">Sampai Tahun</label>
@@ -233,7 +233,7 @@
 <div class="content-wrapper mt-4">
     <div class="box-table">
         <h5 class="text-center">Tabel Barang Berwujud</h5>
-        <table id="example" class=" nowrap table" style="width:100%">
+        <table id="tangiableTable" class=" nowrap table" style="width:100%">
             <thead>
                 <tr>
                     <th>BAST</th>
@@ -258,69 +258,10 @@
                     <th>Pengguna</th>
                     <th>Lokasi</th>
                     <th>Deskripsi</th>
-                    
+
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tangibleAssets as $tangibleAsset)
-                <div class="modal fade" id="practice_modal">
-                    <div class="modal-dialog">
-                        <p class="show-data"></p>
-                    </div>
-                </div>
-
-                <tr>
-                    <td>
-                        @if ($tangibleAsset->file_bast == null)
-                            <a href="/asset-management/show-bast/{{ $tangibleAsset->id }}" class="button-danger" data-bs-toggle="tooltip" data-bs-title="Lihat BAST"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        @else
-                            <a href="/asset-management/show-bast/{{ $tangibleAsset->id }}" class="button-primary" data-bs-toggle="tooltip" data-bs-title="Lihat BAST"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        @endif
-                    </td>
-                    <td>
-                        @if ($tangibleAsset->physical_evidence == null)
-                            <a href="/asset-management/show-image/{{ $tangibleAsset->id}}" class="button-danger" data-bs-toggle="tooltip" data-bs-title="Lihat Bukti Fisik"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        @else
-                            
-                            <a href="/asset-management/show-image/{{ $tangibleAsset->id}}" class="button-primary" data-bs-toggle="tooltip" data-bs-title="Lihat Bukti Fisik"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        @endif
-
-                    </td>
-                    
-                    <td>
-                        <a class="button-warning" href="/asset-management/{{ $tangibleAsset->id }}/edit" data-bs-toggle="tooltip" data-bs-title="Update Aset"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        <form action="/asset-management/{{ $tangibleAsset->id }}" method="POST" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button class="button-danger" onclick="return confirm('Anda yakin menghapus data asset {{ $tangibleAsset->item_name }} ?')" data-bs-toggle="tooltip" data-bs-title="Hapus Asset"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                        </form>
-                        <!-- tampilkan nibar -->
-                        <a class="button-warm" href="/asset-management/label/{{ $tangibleAsset->id }}" data-bs-toggle="tooltip" data-bs-title="Cetak Label"><i class="fa fa-tag" aria-hidden="true"></i></a>
-                    </td>
-
-                    <td>{{ $tangibleAsset->item_code }}</td>
-                    <td>{{ $tangibleAsset->registration }}</td>
-                    <td>{{ $tangibleAsset->internal_code }}</td>
-                    <td>{{ $tangibleAsset->nibar }}</td>
-                    <td>{{ $tangibleAsset->item_name }}</td>
-                    <td>{{ $tangibleAsset->brand }}</td>
-                    <td>{{ $tangibleAsset->certification_number }}</td>
-                    <td>{{ $tangibleAsset->ingredient }}</td>
-                    <td>{{ $tangibleAsset->how_to_earn }}</td>
-                    <td>{{ $tangibleAsset->item_year }}</td>
-                    <td>{{ $tangibleAsset->item_size }}</td>
-                    <td>{{ $tangibleAsset->item_condition }}</td>
-                    <td>{{ $tangibleAsset->unit }}</td>
-                    <td>{{ $tangibleAsset->total }}</td>
-                    <td>{{ $tangibleAsset->used }}</td>
-                    <td>{{ "Rp " . number_format($tangibleAsset->price ,2,',','.');}}</td>
-                    <td>{{ $tangibleAsset->user }}</td>
-                    <td>{{ $tangibleAsset->location }}</td>
-                    <td>{{ $tangibleAsset->description }}</td>
-                    
-                </tr>
-                @endforeach
-
             </tbody>
         </table>
     </div>
@@ -352,7 +293,7 @@
                     <th>Pengguna</th>
                     <th>Harga</th>
                     <th>Deskripsi</th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -365,12 +306,12 @@
                         @else
                             <a href="/asset-management/show-bast/{{ $intangibleAsset->id }}" class="button-primary" data-bs-toggle="tooltip" data-bs-title="Lihat BAST"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         @endif
-                       
+
                     </td>
                     <td>
                         @if ($intangibleAsset->software_evidence == null)
                             <a href="/asset-management/show-non-physical-image/{{ $intangibleAsset->id}}" class="button-danger" data-bs-toggle="tooltip" data-bs-title="Lihat Bukti Non Fisik"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        @else                           
+                        @else
                             <a href="/asset-management/show-non-physical-image/{{ $intangibleAsset->id}}" class="button-primary" data-bs-toggle="tooltip" data-bs-title="Lihat Bukti Non Fisik"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         @endif
                     </td>
@@ -397,7 +338,7 @@
                     <td>{{ $intangibleAsset->user }}</td>
                     <td>{{ "Rp " . number_format($intangibleAsset->price ,2,',','.');}}</td>
                     <td>{{ $intangibleAsset->description }}</td>
-                   
+
                 </tr>
                 @endforeach
             </tbody>
@@ -430,7 +371,6 @@
     btn.addEventListener('change', function () {
         fileChosen.textContent = this.files[0].name
     });
-
     $(document).ready(function () {
         const date = new Date();
 
@@ -441,7 +381,53 @@
             pagingType: "numbers",
         });
 
-        
+        $('#tangiableTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('asset-management.tangible-assets') }}',
+                dataSrc: 'data' // Adjust to match your server response
+            },
+            columns: [
+                { data: 'bast_action' },
+                { data: 'physical_evidence' },
+                { data: 'action' },
+                { data: 'item_code' },
+                { data: 'registration' },
+                { data: 'internal_code' },
+                { data: 'nibar' },
+                { data: 'item_name' },
+                { data: 'brand' },
+                { data: 'certification_number' },
+                { data: 'ingredient' },
+                { data: 'how_to_earn' },
+                { data: 'item_year' },
+                { data: 'item_size' },
+                { data: 'item_condition' },
+                { data: 'unit' },
+                { data: 'total' },
+                { data: 'used' },
+                { data: 'formatted_price' },
+                { data: 'user' },
+                { data: 'location' },
+                { data: 'description' }
+            ],
+            scrollX: true,
+            info: false,
+            bLengthChange: false,
+            pagingType: "numbers",
+            drawCallback: function() {
+            // Reinitialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        }
+
+        });
+
+
+
 
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -450,6 +436,6 @@
             });
         }, 2000);
     });
-   
+
 </script>
 @endsection

@@ -197,6 +197,8 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
     ],
 
     /*
