@@ -79,11 +79,11 @@
                         </div>
                         <div class="mb-2">
                             <label for="registration" class="form-label label-text">Kode Registrasi</label>
-                            <input type="text" class="form-control input-text" id="registration" value="{{ $asset->registration }}" readonly>
+                            <input type="text" class="form-control input-text" id="registration" value="{{ substr($asset->registration, -6) }}" readonly>
                         </div>
                         <div class="mb-2">
                             <label for="nibar" class="form-label label-text">Nibar</label>
-                            <input type="text" class="form-control input-text" id="nibar" value="{{ $asset->nibar }}" readonly>
+                            <textarea id="nibar" class="form-control input-text"  rows="2" readonly style="resize: none; overflow:auto;">{{ $asset->nibar }}</textarea>
                         </div>
                     </form>
                 </div>

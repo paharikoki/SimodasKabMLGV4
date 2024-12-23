@@ -38,7 +38,8 @@ class AssetController extends Controller
     }
     public function tangibleAssets(Request $request) {
         if ($request->ajax()){
-            $data = Asset::all();
+            $data = Asset::orderBy('created_at', 'desc')->where('item_category', 'Berwujud');
+            $data = $data->get();
             return DataTables::of($data)
             ->addColumn('formatted_price', function ($row) {
                 // Format price in Indonesian Rupiah
@@ -102,7 +103,73 @@ class AssetController extends Controller
             ->make(true);
         }
     }
+    // public function intangibleAssets(Request $request) {
+    //         if ($request->ajax()){
+    //             $data = Asset::orderBy('created_at', 'desc')->where('item_category', 'Tak Berwujud');
+    //             $data = $data->get();
+    //             dd($data);
+    //             return DataTables::of($data)
+    //             ->addColumn('formatted_price', function ($row) {
+    //                 // Format price in Indonesian Rupiah
+    //                 return "Rp " . number_format($row->price, 2, ',', '.');
+    //             })
+    //             ->addColumn('action', function ($row) {
+    //                 $editUrl = route('asset-management.edit', $row->id);
+    //                 $deleteUrl = route('asset-management.destroy', $row->id);
+    //                 $labelUrl = route('asset-management.label', $row->id);
 
+    //                 $actionButtons = '
+    //                     <div class="d-flex">
+    //                         <a href="'.$editUrl.'" class="button-warning me-2"
+    //                            data-bs-toggle="tooltip" data-bs-title="Update Aset">
+    //                             <i class="fa fa-pencil" aria-hidden="true"></i>
+    //                         </a>
+
+    //                         <form action="'.$deleteUrl.'" method="POST" class="d-inline me-2">
+    //                             '.method_field('DELETE').'
+    //                             '.csrf_field().'
+    //                             <button type="submit" class="button-danger"
+    //                                     onclick="return confirm(\'Anda yakin menghapus data asset '.$row->item_name.' ?\');"
+    //                                     data-bs-toggle="tooltip" data-bs-title="Hapus Asset">
+    //                                 <i class="fa fa-trash" aria-hidden="true"></i>
+    //                             </button>
+    //                         </form>
+
+    //                         <a href="'.$labelUrl.'" class="button-warm"
+    //                            data-bs-toggle="tooltip" data-bs-title="Cetak Label">
+    //                             <i class="fa fa-tag" aria-hidden="true"></i>
+    //                         </a>
+    //                     </div>
+    //                 ';
+
+    //                 return $actionButtons;
+    //             })
+    //             ->addColumn('bast_action', function ($row) {
+    //                 $bastUrl = route('asset-management.show-bast', $row->id);
+
+    //                 $bastButton = $row->file_bast === null
+    //                     ? '<a href="'.$bastUrl.'" class="button-danger" data-bs-toggle="tooltip" data-bs-title="Lihat BAST">'
+    //                     : '<a href="'.$bastUrl.'" class="button-primary" data-bs-toggle="tooltip" data-bs-title="Lihat BAST">';
+
+    //                 $bastButton .= '<i class="fa fa-eye" aria-hidden="true"></i></a>';
+
+    //                 return $bastButton;
+    //             })
+    //             ->addColumn('physical_evidence', function ($row) {
+    //                 $imageUrl = route('asset-management.show-image', $row->id);
+
+    //                 $imageButton = $row->physical_evidence === null
+    //                     ? '<a href="'.$imageUrl.'" class="button-danger" data-bs-toggle="tooltip" data-bs-title="Lihat Bukti Fisik">'
+    //                     : '<a href="'.$imageUrl.'" class="button-primary" data-bs-toggle="tooltip" data-bs-title="Lihat Bukti Fisik">';
+
+    //                 $imageButton .= '<i class="fa fa-eye" aria-hidden="true"></i></a>';
+
+    //                 return $imageButton;
+    //             })
+    //             -> rawColumns(['action'])
+    //             ->make(true);
+    //         }
+    // }
 
     public function create()
     {
