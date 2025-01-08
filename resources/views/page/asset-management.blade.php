@@ -46,6 +46,17 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h5 class="modal-title mb-3">Import Data</h5>
+                <h6><b>Data yang diimport harus sesuai dengan format</b></h6>
+                <p>Anda bisa download contoh format dibawah ini</p>
+                <form id="categoryForm" method="GET" action="{{ route('asset.exportBlank') }}">
+                    @csrf
+                    <input type="hidden" id="category" name="category" value="">
+
+                    <button type="button" class="btn btn-secondary" id="btn-download-tangibleAssets">Barang Berwujud</button>
+                    <button type="button" class="btn btn-secondary" id="btn-download-intangibleAssets">Barang Tak Berwujud</button>
+                </form>
+
+
                 <form action="/asset-management/import-data" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="wrap-input">
@@ -371,6 +382,17 @@
     btn.addEventListener('change', function () {
         fileChosen.textContent = this.files[0].name
     });
+
+    document.getElementById('btn-download-tangibleAssets').addEventListener('click', function() {
+        document.getElementById('category').value = 'Berwujud';
+        document.getElementById('categoryForm').submit();
+    });
+
+    document.getElementById('btn-download-intangibleAssets').addEventListener('click', function() {
+        document.getElementById('category').value = 'Tak Berwujud';
+        document.getElementById('categoryForm').submit();
+    });
+
     $(document).ready(function () {
         const date = new Date();
 

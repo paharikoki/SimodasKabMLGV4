@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     public function up()
     {
         Schema::create('assets', function (Blueprint $table) {
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('user')->nullable();
             $table->string('internal_code');
             $table->timestamps();
-            // $table->string('nibar')->nullable();
+            $table->string('nibar')->nullable();
         });
     }
 

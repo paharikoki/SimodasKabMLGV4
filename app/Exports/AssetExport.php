@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize
-{  
+{
     protected $request;
 
     use Exportable;
@@ -28,6 +28,7 @@ class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSiz
                 $asset->item_code,
                 $asset->registration,
                 $asset->internal_code,
+                $asset->nibar,
                 $asset->item_name,
                 $asset->brand,
                 $asset->certification_number,
@@ -49,6 +50,7 @@ class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSiz
                 $asset->item_code,
                 $asset->registration,
                 $asset->internal_code,
+                $asset->nibar,
                 $asset->item_year,
                 $asset->title,
                 $asset->creator,
@@ -61,7 +63,7 @@ class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSiz
                 $asset->description,
             ];
         }
-       
+
     }
 
     public function headings(): array
@@ -71,6 +73,7 @@ class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSiz
                 'Kode Barang',
                 'Registrasi',
                 'Kode Internal',
+                'Nibar',
                 'Nama Barang',
                 'Merk / Tipe',
                 'No. Sertifikat',
@@ -83,7 +86,7 @@ class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSiz
                 'Jumlah Barang',
                 'Harga',
                 'Lokasi',
-                'Pengguna', 
+                'Pengguna',
                 'Keterangan'
             ];
         }else if($this->request->category == 'Tak Berwujud'){
@@ -92,6 +95,7 @@ class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSiz
                 'Kode Barang',
                 'Registrasi',
                 'Kode Internal' ,
+                'Nibar',
                 'Tahun Pengadaan',
                 'Judul / Nama',
                 'Pencipta',
@@ -124,6 +128,6 @@ class AssetExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSiz
         }
 
         return $assets;
-        
+
     }
 }

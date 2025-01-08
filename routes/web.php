@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth', 'BackButton']], function(){
     Route::get('/asset-management/label/{id}', [AssetController::class, 'generateLabel'])->name('asset-management.label');
     Route::post('/asset-management/export-data', [AssetController::class, 'assetExportExcel']);
     Route::post('/asset-management/export-data-pdf', [AssetController::class, 'assetExportPDF']);
+    Route::get('/asset-export', [AssetController::class, 'assetExportExcelBlank'])->name('asset.exportBlank');
 
 
 

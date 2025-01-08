@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AssetExport;
+use App\Exports\BlankAssetsExport;
 use App\Imports\AssetImport;
 use App\Models\Asset;
 use App\Models\Distribution;
@@ -25,9 +26,10 @@ class AssetController extends Controller
     {
         $assets = Asset::groupBy('item_year')->select('item_year', DB::raw('count(*) as total'))->get();
         $itemsYear = [];
-        foreach ($assets as $asset){
+        foreach ($assets as $asset) {
             array_push($itemsYear, $asset->item_year);
         }
+        sort($itemsYear);
 
         $intangibleAssets = Asset::orderBy('created_at', 'desc')->where('item_category', 'Tak Berwujud');
         return view('page/asset-management', [
@@ -321,7 +323,7 @@ class AssetController extends Controller
             Alert::toast('Berhasil import data excel', 'success');
             return back();
         }catch(Throwable $e){
-            Alert::toast('Gagal import, pastikan kolom excel sudah sesuai ketentuan', 'error');
+            Alert::toast('Gagal import, '.$e->getMessage(), 'error')->autoClose(10000);
             return redirect('/asset-management');
         }
 
@@ -416,6 +418,10 @@ class AssetController extends Controller
 
     public function assetExportExcel(Request $request){
         return Excel::download(new AssetExport($request), 'Data-Asset.xlsx');
+    }
+    public function assetExportExcelBlank(Request $request){
+        $category = $request->category;
+        return Excel::download(new BlankAssetsExport($category), 'Data-Asset-Blank-' . str_replace(' ', '-', $category) . '.xlsx');
     }
 
     public function generateRecapitulation(Request $request){
