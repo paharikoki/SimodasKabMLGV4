@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Str;
 
-class AssetImport implements ToModel
+class AssetImport implements ToModel,WithHeadingRow
 {
     protected $request;
     function __construct($request)
