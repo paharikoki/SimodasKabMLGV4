@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Ruang;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,12 +17,14 @@ class MasterRuanganController extends Controller
     }
 
     public function index(){
-        $data['ruang'] =  $this->ruang_model->get();
+        $data['ruang'] =  $this->ruang_model->with(['penanggungJawab', 'pengurusRuang', 'kepalaKantor'])->get();
+        // dd($data);
         return view('page.master_ruang.index',compact('data'));
     }
 
     public function createGet(){
-        return view('page.master_ruang.create');
+        $employee = Employee::get();
+        return view('page.master_ruang.create',compact('employee'));
     }
 
     public function createPost(Request $request){
@@ -32,7 +35,7 @@ class MasterRuanganController extends Controller
             'kepala_kantor' => 'nullable',
             'ket' => 'nullable'
         ]);
-
+        // dd($validated);
         $this->ruang_model->create([
             'nama' => $validated['nama'],
             'penanggung_jawab' => $validated['penanggung_jawab'],
@@ -47,7 +50,8 @@ class MasterRuanganController extends Controller
 
     public function edit($id){
         $data['ruang'] =  $this->ruang_model->findOrFail($id);
-        return view('page.master_ruang.edit',compact('data'));
+        $employee = Employee::get();
+        return view('page.master_ruang.edit',compact('data','employee'));
     }
 
     public function updatePost(Request $request){

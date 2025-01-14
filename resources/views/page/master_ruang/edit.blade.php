@@ -41,17 +41,32 @@
         {{-- add --}}
         <div class="wrap-input">
             <label for="penanggung_jawab">Penanggung Jawab</label>
-            <input type="text" name="penanggung_jawab" id="penanggung_jawab" value="{{ $data['ruang']->penanggung_jawab }}" placeholder="Isi Penanggung Jawab" autocomplete="off">
+            <select name="penanggung_jawab" id="penanggung_jawab">
+                <option>Pilih Penanggung Jawab Ruangan</option>
+                @foreach($employee as $emp)
+                    <option value="{{ $emp->id }}" {{ $emp->id == $data['ruang']->penanggung_jawab ? 'selected' : '' }}>{{ $emp->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="wrap-input">
             <label for="pengurus">Pengurus</label>
-            <input type="text" name="pengurus" id="pengurus" value="{{ $data['ruang']->pengurus }}" placeholder="Isi Pengurus" autocomplete="off">
+            <select name="pengurus" id="pengurus">
+                <option>Pilih Pengurus Ruangan</option>
+                @foreach($employee as $emp)
+                    <option value="{{ $emp->id }}" {{ $emp->id == $data['ruang']->pengurus ? 'selected' : '' }}>{{ $emp->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="wrap-input">
             <label for="kepala_kantor">Kepala Kantor</label>
-            <input type="text" name="kepala_kantor" id="kepala_kantor" value="{{ $data['ruang']->kepala_daerah }}" placeholder="Isi Kepala Kantor" autocomplete="off">
+            <select name="kepala_kantor" id="kepala_kantor">
+                <option>Pilih Kepala Kantor</option>
+                @foreach($employee as $emp)
+                <option value="{{ $emp->id }}" {{ $emp->id == $data['ruang']->kepala_kantor ? 'selected' : '' }}>{{ $emp->name }}</option>
+                @endforeach
+            </select>
         </div>
         {{-- add --}}
 
@@ -60,15 +75,8 @@
             <textarea class="form-data" placeholder="Isi Keterangan"  id="floatingTextarea2" style="height: 100px" name="ket">{{ $data['ruang']->ket }}</textarea>
         </div>
 
-
-        @error('password')
-            <p class="error-message"><i>Password harus lebih dari 6 karakter</i></p>
-        @enderror
-        @error('confirm_password')
-             <p class="error-message"><i>Konfirmasi password harus sama dengan password</i></p>
-        @enderror
         <div class="wrap-right-button">
-            <button  class="button-danger me-2"><a href="/account-management">Batalkan</a></button>
+            <button  class="button-danger me-2"><a href="/master-ruang">Batalkan</a></button>
             <button type="submit" class="button-primary">Simpan</button>
         </div>
     </form>

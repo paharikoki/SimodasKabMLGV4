@@ -49,7 +49,7 @@
                 @endforeach
             </select>
         </div>
-        
+
         <div class="wrap-input">
             <label for="barang">Barang</label>
             <select class="form-select js-example-basic-single" id="barang" aria-label="Default select example" name="barang[]" multiple="multiple" required>
@@ -76,7 +76,7 @@
              <p class="error-message"><i>Konfirmasi password harus sama dengan password</i></p>
         @enderror
         <div class="wrap-right-button">
-            <button  class="button-danger me-2"><a href="/account-management">Batalkan</a></button>
+            <button  class="button-danger me-2"><a href="/inventaris-ruang">Batalkan</a></button>
             <button type="submit" class="button-primary">Simpan</button>
         </div>
     </form>
@@ -101,28 +101,32 @@
 <script>
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
+        $('#tahun').change(function () {
+            let selectedTahun = $(this).val();
 
-        // Ketika dropdown tahun berubah
-        $('#tahun').change(function() {
-            let selectedTahun = $(this).val(); 
-            // AJAX request ke server untuk mengambil barang sesuai tahun
             $.ajax({
                 url: '/inventaris-ruang/getBarangByTahun',
                 type: 'GET',
-                data: { tahun: selectedTahun }, 
-                success: function(data) {
-                    $('#barang').empty(); // Kosongkan dropdown barang
+                data: { tahun: selectedTahun },
+                success: function (data) {
+                    // Clear the dropdown
+                    $('#barang').empty();
 
-                    // Tambahkan opsi barang yang baru
-                    $.each(data, function(index, item) {
+                    // Populate the dropdown with unassigned assets
+                    $.each(data, function (index, item) {
                         $('#barang').append('<option value="' + item.id + '">' + item.brand + '</option>');
                     });
 
-                    // Refresh select2 setelah memuat barang baru
+                    // Trigger change event to ensure updates are applied
                     $('#barang').trigger('change');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching data:', error);
                 }
             });
         });
+
+
     });
 </script>
 

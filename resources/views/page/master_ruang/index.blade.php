@@ -30,15 +30,6 @@
     </div>
 </div>
 
-{{-- <div class="alert-wrapper">
-    @if (session()->has('message'))
-        <div class="alert alert-success" role="alert">
-            {{ session('message') }}
-        </div>
-        {{ Session::forget('message') }}
-    @endif
-</div> --}}
-
 <div class="content-wrapper mt-4">
     <div class="box-table">
         <table id="example" class=" nowrap table" style="width:100%">
@@ -55,13 +46,12 @@
             </thead>
             <tbody>
                 @foreach ($data['ruang'] as $key => $item)
-                {{-- {{dd($item->asset->brand)}} --}}
                 <tr>
                     <td>{{ $key+1 }}</td>
                     <td>{{ $item->nama }}</td>
-                    <td>{{ $item->penanggung_jawab }}</td>
-                    <td>{{ $item->pengurus }}</td>
-                    <td>{{ $item->kepala_kantor }}</td>
+                    <td>{{ $item->penanggungJawab->name ?? 'N/A' }}</td>
+                    <td>{{ $item->pengurusRuang->name ?? 'N/A' }}</td>
+                    <td>{{ $item->kepalaKantor->name ?? 'N/A' }}</td>
                     <td>{{ $item->ket }}</td>
                     <td>
                         <form action="/master-ruang/deleted/{{ $item->id }}" method="POST" class="d-inline">

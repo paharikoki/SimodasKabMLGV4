@@ -25,7 +25,7 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            
+
         </div>
     </div>
 
@@ -33,6 +33,20 @@
 <div class="content-wrapper">
     <h6>Nama Ruang</h6>
     <h5 style="font-weight: bold">{{ $data['inventaris']->ruang->nama }} </h5>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <h6>Kepala Kantor</h6>
+            <h6>{{ $data['ruang']->kepalaKantor->name ?? 'N/A' }}</h6>
+        </div>
+        <div class="col-md-4">
+            <h6>Pengurus Ruang</h6>
+            <h6>{{ $data['ruang']->pengurusRuang->name ?? 'N/A' }}</h6>
+        </div>
+        <div class="col-md-4">
+            <h6>Penanggung Jawab</h6>
+            <h6>{{ $data['ruang']->penanggungJawab->name ?? 'N/A' }}</h6>
+        </div>
+    </div>
     <hr>
 
     <h6>List Barang</h6>
@@ -51,24 +65,30 @@
             </tr>
         </thead>
         <tbody style="color: white">
-            @foreach ($data['barang'] as $key => $item)
-            {{-- {{dd($item->asset->brand)}} --}}
-            <tr>
-                <td>{{ $key+1 }}</td>
-                <td>{{ $item->brand }}</td>
-                <td>{{ $item->item_name }}</td>
-                <td>{{ $item->item_code }}</td>
-                <th>{{ $item->nibar }}</th>
-                <td>{{ $item->registration }}</td>
-                <td>{{ $item->total }}</td>
-                <td>{{ $item->item_condition }}</td>
-            </tr>
+            @php
+                $groupedItems = $data['barang']->groupBy('item_code');
+            @endphp
 
+            @foreach ($groupedItems as $itemCode => $items)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $items->first()->brand }}</td>
+                    <td>{{ $items->first()->item_name }}</td>
+                    <td>{{ $itemCode }}</td>
+                    <th>{{ $items->pluck('nibar')->map(function($nibar) { return substr($nibar, -3); })->implode(', ') }}</th>
+                    <td>{{ $items->pluck('registration')->map(function($registration) { return substr($registration, -3); })->implode(', ') }}</td>
+                    <td>{{ $items->sum('total') }}</td>
+                    <td>{{ $items->first()->item_condition }}</td>
+                </tr>
             @endforeach
+
         </tbody>
     </table>
 
-    <a class="button button-primary" target="_blank" href="/inventaris-ruang/printPdf/{{ $data['inventaris']->id }}">Cetak Form Inventaris</a>
+
+    <a class="btn btn-sm btn-primary" id="btn-cetak" href="/inventaris-ruang/printPdf/{{ $data['inventaris']->id }}">Cetak Form Inventaris</a>
+    <a href="/inventaris-ruang" class="btn btn-sm btn-secondary ml-3">Kembali</a>
+
 </div>
 
 @endsection

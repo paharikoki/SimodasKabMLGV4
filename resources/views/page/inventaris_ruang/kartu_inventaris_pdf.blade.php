@@ -4,6 +4,7 @@
 <html>
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <title>Form Peminjaman  </title>
 
@@ -85,49 +86,71 @@
 
     <hr style="border-top: 1px solid black;margin-top: 1rem">
 
-    <table class="table table-bordered" style="text-align: center; vertical-align: bottom;">
+    <table class="table table-bordered" style="text-align: center; vertical-align: center; table-layout: fixed; width: 100%; font-size: 10px; ">
         <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Barang</th>
-                <th>Merk/Type</th>
-                <th>Kode Barang</th>
-                <th>Nibar</th>
-                <th>Register</th>
-                <th>Jumlah Barang</th>
-                <th>Kondisi Barang</th>
+            <tr style="text-align: center; vertical-align: center;">
+                <th rowspan="2" style="width: 5%;">No</th>
+                <th rowspan="2" style="width: 15%;">Nama Barang</th>
+                <th rowspan="2" style="width: 15%;">Merk/Type</th>
+                <th rowspan="2" style="width: 8%;">Tahun</th>
+                <th rowspan="2" style="width: 10%;">Kode Barang</th>
+                <th rowspan="2" style="width: 10%;">Nibar</th>
+                <th rowspan="2" style="width: 10%;">Register</th>
+                <th rowspan="2" style="width: 8%;">Jumlah Barang</th>
+                <th colspan="3" style="width: 30%;">Kondisi Barang</th>
+                <th rowspan="2" style="width: 10%;">Keterangan</th>
+            </tr>
+            <tr style="text-align: center; vertical-align: center;">
+                <th style="width: 10%;">Baik</th>
+                <th style="width: 10%;">Kurang Baik</th>
+                <th style="width: 10%;">Rusak Berat</th>
             </tr>
         </thead>
-        <tbody style="">
-            @foreach ($data['barang'] as $key => $item)
-            <tr>
-                <td>{{ $key+1 }}</td>
-                <td>{{ $item->brand }}</td>
-                <td>{{ $item->item_name }}</td>
-                <td>{{ $item->item_code }}</td>
-                <td>{{ $item->nibar }}</td>
-                <td>{{ $item->registration }}</td>
-                <td>{{ $item->total }}</td>
-                <td>{{ $item->item_condition }}</td>
-            </tr>
-            @endforeach
-        </tbody>
 
+        <tbody>
+            @php
+                $groupedItems = $data['barang']->groupBy('item_code');
+            @endphp
+
+            @foreach ($groupedItems as $itemCode => $items)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td style="word-wrap: break-word;">{{ $items->first()->brand }}</td>
+                    <td style="word-wrap: break-word;">{{ $items->first()->item_name }}</td>
+                    <td>{{ $items->first()->item_year }}</td>
+                    <td>{{ $itemCode }}</td>
+                    <td>{{ $items->pluck('nibar')->map(function($nibar) { return substr($nibar, 0, 3); })->implode(', ') }}</td>
+                    <td>{{ $items->pluck('registration')->map(function($registration) { return substr($registration, 0, 3); })->implode(', ') }}</td>
+                    <td>{{ $items->sum('total') }}</td>
+
+                    <td>{!! $items->contains('item_condition', 'Baik') ? '<div style="font-family: DejaVu Sans, sans-serif; font-size:14px;">&checkmark;</div>' : '' !!}</td>
+                    <td>{!! $items->contains('item_condition', 'Kurang Baik') ? '<div style="font-family: DejaVu Sans, sans-serif; font-size:14px;">&checkmark;</div>' : '' !!}</td>
+                    <td>{!! $items->contains('item_condition', 'Rusak Berat') ? '<div style="font-family: DejaVu Sans, sans-serif; font-size:14px;">&checkmark;</div>' : '' !!}</td>
+                    <td style="word-wrap: break-word;">{{ $items->first()->description }}</td>
+                </tr>
+            @endforeach
+
+        </tbody>
     </table>
-    <table class="table table-custom">
-        <tr >
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="1"></td>
-            <td colspan="5"></td>
-            <td colspan="2" class='c31_9' style="text-align: center;font-size: 15px">
-                Mengetahui,
+
+    <table  style="width: 100%; margin-top: 20px; text-align: center; font-size: 12px; border-collapse: collapse; border: none;;">
+        <tr>
+            <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Mengetahui</b><br>
+                <b>Kepala Dinas Komunikasi dan Informatika</b><br><br><br><br>
+                <u><b>{{ $data['ruang']->kepalaKantor->name ?? 'N/A'  }}</b></u><br>
+                <span>NIP.{{ $data['ruang']->kepalaKantor->nip ?? '-'  }}</span>
             </td>
-            <br><br>
-            <hr>
+            <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Pengurus Barang</b><br><br><br><br><br>
+                <u><b>{{ $data['ruang']->penanggungJawab->name ?? 'N/A'  }}</b></u><br>
+                <span>NIP.{{ $data['ruang']->penanggungJawab->nip ?? '-'  }}</span>
+            </td>
+            <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Malang, {{ now()->translatedFormat('d F Y') }}</b><br>
+                <b>Penanggung Jawab Ruangan</b><br><br><br><br>
+                <u><b>{{ $data['ruang']->pengurusRuang->name ?? 'N/A'  }}</b></u><br>
+                <span>NIP.{{ $data['ruang']->pengurusRuang->nip ?? '-'  }}</span>
+            </td>
         </tr>
     </table>
-
 </body>
 
 

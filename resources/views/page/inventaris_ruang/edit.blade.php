@@ -45,11 +45,24 @@
         <div class="wrap-input">
             <label for="barang">Barang</label>
             <select class="form-select js-example-basic-single" id="barang" aria-label="Default select example" name="barang[]" multiple="multiple" required>
-                @foreach ($data['barang'] as $item )
-                    <option value="{{ $item->id }}">{{ $item->brand }}</option>
+                @foreach ($data['barang'] as $item)
+                    <option value="{{ $item->id }}"
+                        @if (
+                            count($data['barang']) === 1 &&
+                            in_array($item->id, is_array($data['inventaris']->assets_id) ? $data['inventaris']->assets_id : (json_decode($data['inventaris']->assets_id, true) ?? []))
+                        )
+                            selected
+                        @endif>
+                        {{ $item->brand }}
+                    </option>
+
                 @endforeach
             </select>
         </div>
+
+
+
+
 
 
 
@@ -60,7 +73,7 @@
              <p class="error-message"><i>Konfirmasi password harus sama dengan password</i></p>
         @enderror
         <div class="wrap-right-button">
-            <button  class="button-danger me-2"><a href="/account-management">Batalkan</a></button>
+            <button  class="button-danger me-2"><a href="/inventaris-ruang">Batalkan</a></button>
             <button type="submit" class="button-primary">Simpan</button>
         </div>
     </form>
@@ -83,15 +96,17 @@
 <script src="{{ asset('/js/table.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+        // Initialize Select2
         $('#ruang').select2();
         $('#barang').select2();
-
         var dataSelect2 = @json($data['inventaris']->assets_id);
-        $("#barang").val(dataSelect2).trigger("change");
-
+        if (Array.isArray(dataSelect2) && dataSelect2.length > 0) {
+            $('#barang').val(dataSelect2).trigger('change');
+        }
     });
 </script>
+
 
 @endsection
 

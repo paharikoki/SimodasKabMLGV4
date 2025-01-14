@@ -20,7 +20,7 @@
 @endsection
 
 @section('view-of-content')
-<h2>Tambah Master</h2>
+<h2>Tambah Master Ruang</h2>
 @include('sweetalert::alert')
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -33,24 +33,39 @@
     <form method="post" action="/master-ruang/createPost">
         @csrf
         <div class="wrap-input">
-            <label for="name">Nama</label>
+            <label for="name">Nama Ruangan</label>
             <input type="text" class="form-data" id="name" name="nama"  value=""  placeholder="Isi Nama"  autocomplete="off">
         </div>
 
         {{-- add --}}
         <div class="wrap-input">
-            <label for="penanggung_jawab">Penanggung Jawab</label>
-            <input type="text" class="form-data" name="penanggung_jawab" id="penanggung_jawab" value="" placeholder="Isi Penanggung Jawab" autocomplete="off">
+            <label for="penanggung_jawab">Penanggung Jawab Ruangan</label>
+            <select name="penanggung_jawab" id="penanggung_jawab">
+                <option>Pilih Penanggung Jawab Ruangan</option>
+                @foreach($employee as $emp)
+                    <option value="{{ $emp->id }}">{{ $emp->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="wrap-input">
-            <label for="pengurus">Pengurus</label>
-            <input type="text" class="form-data" name="pengurus" id="pengurus" value="" placeholder="Isi Pengurus" autocomplete="off">
+            <label for="pengurus">Pengurus Ruangan</label>
+            <select name="pengurus" id="pengurus">
+                <option>Pilih Pengurus Ruangan</option>
+                @foreach($employee as $emp)
+                    <option value="{{ $emp->id }}">{{ $emp->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="wrap-input">
             <label for="kepala_kantor">Kepala Kantor</label>
-            <input type="text" class="form-data" name="kepala_kantor" id="kepala_kantor" value="" placeholder="Isi Kepala Kantor" autocomplete="off">
+            <select name="kepala_kantor" id="kepala_kantor">
+                <option>Pilih Kepala Kantor</option>
+                @foreach($employee as $emp)
+                    <option value="{{ $emp->id }}">{{ $emp->name }}</option>
+                @endforeach
+            </select>
         </div>
         {{-- add --}}
 
@@ -73,7 +88,7 @@
              <p class="error-message"><i>Konfirmasi password harus sama dengan password</i></p>
         @enderror --}}
         <div class="wrap-right-button">
-            <button  class="button-danger me-2"><a href="/account-management">Batalkan</a></button>
+            <button  class="button-danger me-2"><a href="/master-ruang">Batalkan</a></button>
             <button type="submit" class="button-primary">Simpan</button>
         </div>
     </form>
