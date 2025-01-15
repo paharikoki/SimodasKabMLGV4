@@ -46,16 +46,7 @@
             <label for="barang">Barang</label>
             <select class="form-select js-example-basic-single" id="barang" aria-label="Default select example" name="barang[]" multiple="multiple" required>
                 @foreach ($data['barang'] as $item)
-                    <option value="{{ $item->id }}"
-                        @if (
-                            count($data['barang']) === 1 &&
-                            in_array($item->id, is_array($data['inventaris']->assets_id) ? $data['inventaris']->assets_id : (json_decode($data['inventaris']->assets_id, true) ?? []))
-                        )
-                            selected
-                        @endif>
-                        {{ $item->brand }}
-                    </option>
-
+                    <option value="{{ $item->id }}">{{ $item->brand }}</option>
                 @endforeach
             </select>
         </div>
@@ -101,11 +92,18 @@
         $('#ruang').select2();
         $('#barang').select2();
         var dataSelect2 = @json($data['inventaris']->assets_id);
-        if (Array.isArray(dataSelect2) && dataSelect2.length > 0) {
+        if (typeof dataSelect2 === 'string') {
+            dataSelect2 = JSON.parse(dataSelect2) || [];
+        }
+        if (!Array.isArray(dataSelect2)) {
+            dataSelect2 = [dataSelect2];
+        }
+        if (dataSelect2.length > 0) {
             $('#barang').val(dataSelect2).trigger('change');
         }
     });
 </script>
+
 
 
 @endsection
