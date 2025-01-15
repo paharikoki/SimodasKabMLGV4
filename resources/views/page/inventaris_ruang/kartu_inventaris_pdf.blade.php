@@ -10,6 +10,32 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <style>
+        table.custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        table.custom-table th, table.custom-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
+            word-wrap: break-word;
+        }
+
+        table.custom-table th {
+            font-size: 14px;
+            background-color: #f2f2f2;
+        }
+
+        table.custom-table thead tr:nth-child(2) th {
+            font-size: 12px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -63,16 +89,6 @@
                  <span>: </span> Dinas Komunikasi dan Informatika
             </td>
         </tr>
-
-        <tr style='height:18px'>
-            <td style='width:10px'></td>
-            <td colspan='2'>
-                <span class="font-weight-bold">Sub Unit Organisasi</span>
-            </td>
-            <td colspan='3'>
-                <span>: </span> DINAS KOMUNIKASI DAN INFORMATIKA
-            </td>
-        </tr>
         <tr style='height:18px'>
             <td style='width:10px'></td>
             <td colspan='2'>
@@ -86,21 +102,21 @@
 
     <hr style="border-top: 1px solid black;margin-top: 1rem">
 
-    <table class="table table-bordered" style="text-align: center; vertical-align: center; table-layout: fixed; width: 100%; font-size: 10px; ">
+    <table class="custom-table" style="text-align: center; vertical-align: middle; table-layout: fixed; width: 100%; font-size: 12px;">
         <thead>
-            <tr style="text-align: center; vertical-align: center;">
-                <th rowspan="2" style="width: 5%;">No</th>
-                <th rowspan="2" style="width: 15%;">Nama Barang</th>
-                <th rowspan="2" style="width: 15%;">Merk/Type</th>
-                <th rowspan="2" style="width: 8%;">Tahun</th>
-                <th rowspan="2" style="width: 10%;">Kode Barang</th>
-                <th rowspan="2" style="width: 10%;">Nibar</th>
-                <th rowspan="2" style="width: 10%;">Register</th>
-                <th rowspan="2" style="width: 8%;">Jumlah Barang</th>
+            <tr style="text-align: center; vertical-align: middle; font-size: 14px;">
+                <th rowspan="2" style="width: 5%; text-align: center; vertical-align: middle; ">No</th>
+                <th rowspan="2" style="width: 15%; text-align: center; vertical-align: middle;">Nama Barang</th>
+                <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Merk/Type</th>
+                <th rowspan="2" style="width: 8%; text-align: center; vertical-align: middle;">Tahun</th>
+                <th rowspan="2" style="width: 15%; text-align: center; vertical-align: middle;">Kode Barang</th>
+                <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Nibar</th>
+                <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Register</th>
+                <th rowspan="2" style="width: 8%; text-align: center; vertical-align: middle;">Jumlah Barang</th>
                 <th colspan="3" style="width: 30%;">Kondisi Barang</th>
-                <th rowspan="2" style="width: 10%;">Keterangan</th>
+                <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Keterangan</th>
             </tr>
-            <tr style="text-align: center; vertical-align: center;">
+            <tr style="text-align: center; vertical-align: middle; font-size: 14px; padding: 4px;">
                 <th style="width: 10%;">Baik</th>
                 <th style="width: 10%;">Kurang Baik</th>
                 <th style="width: 10%;">Rusak Berat</th>
@@ -133,24 +149,49 @@
         </tbody>
     </table>
 
-    <table  style="width: 100%; margin-top: 20px; text-align: center; font-size: 12px; border-collapse: collapse; border: none;;">
-        <tr>
-            <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Mengetahui</b><br>
-                <b>Kepala Dinas Komunikasi dan Informatika</b><br><br><br><br>
-                <u><b>{{ $data['ruang']->kepalaKantor->name ?? 'N/A'  }}</b></u><br>
-                <span>NIP.{{ $data['ruang']->kepalaKantor->nip ?? '-'  }}</span>
-            </td>
-            <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Pengurus Barang</b><br><br><br><br><br>
-                <u><b>{{ $data['ruang']->penanggungJawab->name ?? 'N/A'  }}</b></u><br>
-                <span>NIP.{{ $data['ruang']->penanggungJawab->nip ?? '-'  }}</span>
-            </td>
-            <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Malang, {{ now()->translatedFormat('d F Y') }}</b><br>
-                <b>Penanggung Jawab Ruangan</b><br><br><br><br>
-                <u><b>{{ $data['ruang']->pengurusRuang->name ?? 'N/A'  }}</b></u><br>
-                <span>NIP.{{ $data['ruang']->pengurusRuang->nip ?? '-'  }}</span>
-            </td>
-        </tr>
-    </table>
+
+    <div style="page-break-inside: avoid;">
+        <table style="width: 100%; margin-top: 20px; text-align: center; font-size: 12px; border-collapse: collapse; border: none; padding: 0; margin:0;">
+            <tr>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Mengetahui</b>
+                </td>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+
+                </td>
+                <td style="width: 33%; text-align: center; ">
+                    <b>Malang, {{ now()->translatedFormat('d F Y') }}</b>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+                    <b>Kepala Dinas Komunikasi dan Informatika</b>
+                    <br/><br/><br/><br>
+                </td>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+                    <b>Pengurus Barang</b>
+                    <br/><br/><br/><br>
+                </td>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+                    <b>Penanggung Jawab Ruangan</b>
+                    <br/><br/><br/><br>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+                    <u><b>{{ $data['ruang']->kepalaKantor->name ?? 'N/A' }}</b></u><br>
+                    <span>NIP.{{ $data['ruang']->kepalaKantor->nip ?? '-' }}</span>
+                </td>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+                    <u><b>{{ $data['ruang']->penanggungJawab->name ?? 'N/A' }}</b></u><br>
+                    <span>NIP.{{ $data['ruang']->penanggungJawab->nip ?? '-' }}</span>
+                </td>
+                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+                    <u><b>{{ $data['ruang']->pengurusRuang->name ?? 'N/A' }}</b></u><br>
+                    <span>NIP.{{ $data['ruang']->pengurusRuang->nip ?? '-' }}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 
 
