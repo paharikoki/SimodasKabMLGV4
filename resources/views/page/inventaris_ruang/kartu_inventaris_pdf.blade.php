@@ -30,6 +30,9 @@
             font-size: 14px;
             background-color: #f2f2f2;
         }
+        table.custom-table td {
+            font-size: 8px;
+        }
 
         table.custom-table thead tr:nth-child(2) th {
             font-size: 12px;
@@ -107,9 +110,9 @@
             <tr style="text-align: center; vertical-align: middle; font-size: 14px;">
                 <th rowspan="2" style="width: 5%; text-align: center; vertical-align: middle; ">No</th>
                 <th rowspan="2" style="width: 15%; text-align: center; vertical-align: middle;">Nama Barang</th>
-                <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Merk/Type</th>
+                <th rowspan="2" style="width: 12%; text-align: center; vertical-align: middle;">Merk/Type</th>
                 <th rowspan="2" style="width: 8%; text-align: center; vertical-align: middle;">Tahun</th>
-                <th rowspan="2" style="width: 15%; text-align: center; vertical-align: middle;">Kode Barang</th>
+                <th rowspan="2" style="width: 13%; text-align: center; vertical-align: middle;">Kode Barang</th>
                 <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Nibar</th>
                 <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Register</th>
                 <th rowspan="2" style="width: 8%; text-align: center; vertical-align: middle;">Jumlah Barang</th>
@@ -135,8 +138,8 @@
                     <td style="word-wrap: break-word;">{{ $items->first()->item_name }}</td>
                     <td>{{ $items->first()->item_year }}</td>
                     <td>{{ $itemCode }}</td>
-                    <td>{{ $items->pluck('nibar')->map(function($nibar) { return substr($nibar, 0, 3); })->implode(', ') }}</td>
-                    <td>{{ $items->pluck('registration')->map(function($registration) { return substr($registration, 0, 3); })->implode(', ') }}</td>
+                    <td>{{ $items->pluck('nibar')->map(function($nibar) { return substr($nibar, -3); })->implode(', ') }}</td>
+                    <td>{{ $items->pluck('registration')->map(function($registration) { return substr($registration, -3); })->implode(', ') }}</td>
                     <td>{{ $items->sum('total') }}</td>
 
                     <td>{!! $items->contains('item_condition', 'Baik') ? '<div style="font-family: DejaVu Sans, sans-serif; font-size:14px;">&checkmark;</div>' : '' !!}</td>
@@ -150,8 +153,8 @@
     </table>
 
 
-    <div style="page-break-inside: avoid;">
-        <table style="width: 100%; margin-top: 20px; text-align: center; font-size: 12px; border-collapse: collapse; border: none; padding: 0; margin:0;">
+    <div style="page-break-inside: avoid;" style="margin-top: 20px;">
+        <table style="width: 100%;  text-align: center; font-size: 12px; border-collapse: collapse; border: none; padding: 0; margin:0;">
             <tr>
                 <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Mengetahui</b>
                 </td>
