@@ -116,13 +116,13 @@
                 <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Nibar</th>
                 <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Register</th>
                 <th rowspan="2" style="width: 8%; text-align: center; vertical-align: middle;">Jumlah Barang</th>
-                <th colspan="3" style="width: 30%;">Kondisi Barang</th>
-                <th rowspan="2" style="width: 10%; text-align: center; vertical-align: middle;">Keterangan</th>
+                <th colspan="3" style="width: 27%;">Kondisi Barang</th>
+                <th rowspan="2" style="width: 13%; text-align: center; vertical-align: middle;">Keterangan</th>
             </tr>
             <tr style="text-align: center; vertical-align: middle; font-size: 14px; padding: 4px;">
-                <th style="width: 10%;">Baik</th>
-                <th style="width: 10%;">Kurang Baik</th>
-                <th style="width: 10%;">Rusak Berat</th>
+                <th style="width: 9%;">Baik</th>
+                <th style="width: 9%;">Kurang Baik</th>
+                <th style="width: 9%;">Rusak Berat</th>
             </tr>
         </thead>
 
@@ -156,9 +156,9 @@
     <div style="page-break-inside: avoid;" style="margin-top: 20px;">
         <table style="width: 100%;  text-align: center; font-size: 12px; border-collapse: collapse; border: none; padding: 0; margin:0;">
             <tr>
-                <td style="width: 33%; text-align: center; text-transform: uppercase;"><b>Mengetahui</b>
+                <td style="width: 33%; text-align: center;"><b>Mengetahui</b>
                 </td>
-                <td style="width: 33%; text-align: center; text-transform: uppercase;">
+                <td style="width: 33%; text-align: center;">
 
                 </td>
                 <td style="width: 33%; text-align: center; ">
