@@ -69,12 +69,14 @@
                     <td>superadmin</td>
                     {{ $item->status_text }}
                     <td>
+                        @if(auth()->user()->hasRole('Administrator'))
                         <form action="/transaksi-peminjaman/deleted/{{ $item->id }}" method="POST" class="d-inline">
                             @method('delete')
                             @csrf
                             <button class="button-danger" onclick="return confirm('Anda yakin menghapus data asset {{ $item->name }} ?')">Delete</button>
                         </form>
                         <a class="button button-primary" href="transaksi-peminjaman/edit/{{$item->id}}">Edit</a>
+                        @endif
                         <a class="button button-warning" href="transaksi-peminjaman/show/{{$item->id}}">Lihat</a>
                     </td>
                 </tr>

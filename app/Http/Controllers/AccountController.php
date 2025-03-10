@@ -30,12 +30,16 @@ class AccountController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
-            'confirm_password' => 'required|same:password|min:6',
+            'level' => 'required'
         ]);
-        $validatedData['level'] = 'User';
+        if($request->level == 'administrator'){
+            $validatedData['level'] = 'Administrator';
+        }else{
+            $validatedData['level'] = 'User';
+        }
         $validatedData['password'] = Hash::make($validatedData['password']);
-        User::create($validatedData);
-
+        $user = User::create($validatedData);
+        $user->assignRole($validatedData['level']);
         Alert::toast('Berhasil membuat akun', 'success');
         return redirect('/account-management');
     }
@@ -47,7 +51,7 @@ class AccountController extends Controller
 
 
     public function updatePassword(Request $request){
-        
+
         $request->validate([
             'old_password' => 'required',
             'password' => 'required|min:6',
@@ -58,13 +62,13 @@ class AccountController extends Controller
         $account = User::find( auth()->user()->id);
 
         if(Hash::check($request->old_password, auth()->user()->password)){
-            
+
            $account->update(['password' => Hash::make($request->password)]);
             Alert::toast('Berhasil memperbarui password', 'success');
             return redirect('/account-management/update-password');
         }
         Alert::toast('Password lama yang anda masukkan salah', 'error');
-        
+
         return redirect('/account-management/update-password');
 
     }
@@ -74,7 +78,7 @@ class AccountController extends Controller
     }
 
     public function update(Request $request){
-        
+
         $account = User::find( auth()->user()->id);
         $validatedData = $request->validate([
             'name' => 'required',
@@ -88,7 +92,7 @@ class AccountController extends Controller
         }else{
             return redirect('/');
         }
-       
+
 
     }
 

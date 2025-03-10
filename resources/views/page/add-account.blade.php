@@ -30,20 +30,19 @@
             <input type="email" autocomplete="off" class="form-data" id="email" name="email" required value="{{ old('email') }}">
         </div>
         <div class="wrap-input">
+            <label for="level">Role</label>
+            <select name="level" id="level" class="form-data">
+                <option value="administrator">Administrator</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+        <div class="wrap-input">
             <label for="password">Password</label>
             <input type="password" autocomplete="new-password" class="form-data @error('password') is-invalid @enderror" id="password" name="password" required>
             <p><i>*Password minimal 6 karakter.</i></p>
         </div>
-        <div class="wrap-input">
-            <label for="confirm_password">Konfirmasi Password</label>
-            <input type="password" class="form-data" id="confirm_password" name="confirm_password" name="confirm_password" required>
-            <p><i>*Password minimal 6 karakter.</i></p>
-        </div>
         @error('password')
             <p class="error-message"><i>Password harus lebih dari 6 karakter</i></p>
-        @enderror
-        @error('confirm_password')
-             <p class="error-message"><i>Konfirmasi password harus sama dengan password</i></p>
         @enderror
         <div class="wrap-right-button">
             <button  class="button-danger me-2"><a href="/account-management">Batalkan</a></button>

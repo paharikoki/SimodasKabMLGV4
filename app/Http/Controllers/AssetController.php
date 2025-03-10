@@ -52,8 +52,10 @@ class AssetController extends Controller
                 $deleteUrl = route('asset-management.destroy', $row->id);
                 $labelUrl = route('asset-management.label', $row->id);
 
-                $actionButtons = '
-                    <div class="d-flex">
+                $actionButtons = '<div class="d-flex">';
+
+                if (auth()->user()->hasRole('Administrator')) {
+                    $actionButtons .= '
                         <a href="'.$editUrl.'" class="button-warning me-2"
                            data-bs-toggle="tooltip" data-bs-title="Update Aset">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -67,14 +69,15 @@ class AssetController extends Controller
                                     data-bs-toggle="tooltip" data-bs-title="Hapus Asset">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
-                        </form>
+                        </form>';
+                }
 
-                        <a href="'.$labelUrl.'" class="button-warm"
-                           data-bs-toggle="tooltip" data-bs-title="Cetak Label">
-                            <i class="fa fa-tag" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                ';
+                $actionButtons .= '
+                    <a href="'.$labelUrl.'" class="button-warm"
+                       data-bs-toggle="tooltip" data-bs-title="Cetak Label">
+                        <i class="fa fa-tag" aria-hidden="true"></i>
+                    </a>
+                </div>';
 
                 return $actionButtons;
             })

@@ -8,7 +8,12 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
             ],
-            refresh: true,
+            refresh: [
+                'resources/views/**/*.js',
+                'resources/views/**/*.css',
+                'resources/views/**/*.php',
+                'app/**/*.php',
+            ]
         }),
     ],
 });
