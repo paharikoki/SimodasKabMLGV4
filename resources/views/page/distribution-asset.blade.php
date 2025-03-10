@@ -39,7 +39,7 @@
                 <thead>
                     <tr>
                         <th>BAST</th>
-                        @if (auth()->user()->hasRole('Administrator'))
+                        @if (auth()->user()->level == 'Administrator')
                         <th>Aksi</th>
                         @endif
                         <th>Nama Barang</th>
@@ -67,7 +67,7 @@
                                 <a class="button-primary" href="/bast/{{ $dist->id }}/generate-pdf-v4"
                                     data-bs-toggle="tooltip" data-bs-title="Lihat BAST P3K 3 TTD">V4</a>
                             </td>
-                            @if (auth()->user()->hasRole('Administrator'))
+                            @if (auth()->user()->level == 'Administrator')
                             <td>
                                 <a class="button-warning" href="/bast/{{ $dist->id }}/edit" data-bs-toggle="tooltip"
                                     data-bs-title="Update BAST"><i class="fa fa-pencil" aria-hidden="true"></i></a>

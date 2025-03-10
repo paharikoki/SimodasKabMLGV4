@@ -57,6 +57,9 @@
             <select class="form-select select-status" id="status" aria-label="Default select example" name="status"required>
                 <option value="0" {{ $data['transaksi']->status  == 0 ? 'selected' : '' }}>Dipinjam</option>
                 <option value="1" {{ $data['transaksi']->status  == 1 ? 'selected' : '' }}>Dikembalikan</option>
+                <option value="2" {{ $data['transaksi']->status  == 2 ? 'selected' : '' }}>Belum Dikonfirmasi</option>
+                <option value="3" {{ $data['transaksi']->status  == 3 ? 'selected' : '' }}>Dikonfirmasi</option>
+                <option value="4" {{ $data['transaksi']->status  == 4 ? 'selected' : '' }}>Ditolak</option>
             </select>
         </div>
 
@@ -100,7 +103,7 @@
              <p class="error-message"><i>Konfirmasi password harus sama dengan password</i></p>
         @enderror
         <div class="wrap-right-button">
-            <button  class="button-danger me-2"><a href="/account-management">Batalkan</a></button>
+            <button  class="button-danger me-2"><a href="/transaksi-peminjaman">Batalkan</a></button>
             <button type="submit" class="button-primary">Simpan</button>
         </div>
     </form>

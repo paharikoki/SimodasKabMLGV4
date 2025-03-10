@@ -27,6 +27,7 @@ class TransaksiPeminjamanController extends Controller
     {
         $data['transaksi'] = $this->transaksi_peminjaman_model->with(['asset', 'employee'])->get();
 
+        // return response()->json($data['transaksi']);
         return view('page.transaksi_peminjaman.index', compact('data'));
     }
 
@@ -47,7 +48,7 @@ class TransaksiPeminjamanController extends Controller
         //     ->get();
 
         $data['tahun'] = $this->asset_model
-            ->select('item_year')   
+            ->select('item_year')
             ->distinct()
             ->orderBy('item_year', 'desc')
             ->get();
@@ -71,14 +72,14 @@ class TransaksiPeminjamanController extends Controller
             ->where('item_year', $tahun)
             ->whereNotIn('id', $dataArrayBarang)
             ->get();
-            
+
         // $barang = Asset::where('item_year', $tahun)
         //     ->whereNotIn('id', $dataArrayBarang)
         //     ->get();
-    
+
         return response()->json($barang);
     }
-    
+
 
     public function showById($id)
     {
@@ -114,7 +115,7 @@ class TransaksiPeminjamanController extends Controller
         }
 
         $data['barang'] = $this->asset_model->whereNotIn('id', $dataTempArray)->get();
-
+        // return response()->json($data['transaksi']);
         return view('page.transaksi_peminjaman.edit', compact('data'));
     }
 
@@ -127,6 +128,10 @@ class TransaksiPeminjamanController extends Controller
             'tgl_balik' => 'required',
             'keperluan' => 'required',
         ]);
+        $status = 0;
+        if (auth()->user()->level != 'Administrator') {
+            $status = 2;
+        }
 
         TransaksiPeminjaman::create([
             'employee_id' => $validated['nama'],
@@ -134,7 +139,7 @@ class TransaksiPeminjamanController extends Controller
             'tanggal_pengembalian' => Carbon::createFromFormat('m/d/Y', $validated['tgl_balik'])->format('Y-m-d'),
             'keperluan_penggunaan' => $validated['keperluan'],
             'assets_id' => $validated['barang'],
-            'status' => 0
+            'status' => $status
 
         ]);
         Alert::toast('Berhasil menambahkan data transaksi', 'success');

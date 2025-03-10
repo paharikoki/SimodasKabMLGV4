@@ -15,7 +15,11 @@ class TransaksiPeminjaman extends Model
 
     CONST STATUS = [
         '0' => 'Dipinjam',
-        '1' => 'Dikembalikan'
+        '1' => 'Dikembalikan',
+        '2' => 'Belum Dikonfirmasi',
+        '3' => 'Dikonfirmasi',
+        '4' => 'Ditolak'
+
     ];
 
     protected $casts = [

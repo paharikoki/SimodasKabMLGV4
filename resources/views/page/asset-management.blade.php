@@ -20,7 +20,7 @@
             <p>Pilihan Menu</p>
             <div class="wrapper-button">
                 <div class="row row-cols-auto gy-4">
-                    @if (auth()->user()->hasRole('Administrator'))
+                    @if (auth()->user()->level == 'Administrator')
                         <div class="col">
                             <a class="button-primary mt-2" href="/asset-management/add-asset-data">Tambah Data</a>
                         </div>
@@ -29,7 +29,7 @@
                                 Excel</a>
                         </div>
                     @endif
-                    @if (auth()->user()->hasRole(['user', 'Administrator']))
+                    @if (auth()->user()->level == 'user' || auth()->user()->level == 'Administrator')
                         <div class="col">
                             <a class="button-primary mt-2" role="button" data-bs-toggle="modal"
                                 data-bs-target="#formExportModal">Export Excel</a>

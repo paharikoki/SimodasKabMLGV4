@@ -54,7 +54,7 @@ class AssetController extends Controller
 
                 $actionButtons = '<div class="d-flex">';
 
-                if (auth()->user()->hasRole('Administrator')) {
+                if (auth()->user()->level == 'Administrator' ) {
                     $actionButtons .= '
                         <a href="'.$editUrl.'" class="button-warning me-2"
                            data-bs-toggle="tooltip" data-bs-title="Update Aset">

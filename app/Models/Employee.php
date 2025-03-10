@@ -22,4 +22,8 @@ class Employee extends Model
     {
         return $this->hasMany(Ruang::class, 'kepala_kantor');
     }
+    public function transaksiPeminjaman()
+    {
+        return $this->hasMany(TransaksiPeminjaman::class, 'employee_id');
+    }
 }

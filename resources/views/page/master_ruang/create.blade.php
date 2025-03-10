@@ -41,7 +41,7 @@
         <div class="wrap-input">
             <label for="penanggung_jawab">Penanggung Jawab Ruangan</label>
             <select name="penanggung_jawab" id="penanggung_jawab">
-                <option>Pilih Penanggung Jawab Ruangan</option>
+                <option value="">Pilih Penanggung Jawab Ruangan</option>
                 @foreach($employee as $emp)
                     <option value="{{ $emp->id }}">{{ $emp->name }}</option>
                 @endforeach
@@ -51,7 +51,7 @@
         <div class="wrap-input">
             <label for="pengurus">Pengurus Ruangan</label>
             <select name="pengurus" id="pengurus">
-                <option>Pilih Pengurus Ruangan</option>
+                <option value="">Pilih Pengurus Ruangan</option>
                 @foreach($employee as $emp)
                     <option value="{{ $emp->id }}">{{ $emp->name }}</option>
                 @endforeach
@@ -61,7 +61,7 @@
         <div class="wrap-input">
             <label for="kepala_kantor">Kepala Kantor</label>
             <select name="kepala_kantor" id="kepala_kantor">
-                <option>Pilih Kepala Kantor</option>
+                <option value="">Pilih Kepala Kantor</option>
                 @foreach($employee as $emp)
                     <option value="{{ $emp->id }}">{{ $emp->name }}</option>
                 @endforeach

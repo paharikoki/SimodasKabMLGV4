@@ -51,7 +51,7 @@
                         <img class="ic_menu" src="{{ asset('/assets/icon/ic_bast.svg') }}" alt="icon asset">
                         Transaksi Peminjaman</a>
                 </li>
-                @if (auth()->user()->hasRole('Administrator'))
+                @if (auth()->user()->level == 'Administrator')
                     <li class="navbar-link">
                         <a href="/inventaris-ruang" class="wrapper-menu">
                             <img class="ic_menu" src="{{ asset('/assets/icon/ic_bast.svg') }}" alt="icon asset">

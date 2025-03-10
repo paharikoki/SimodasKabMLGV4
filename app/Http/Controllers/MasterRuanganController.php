@@ -35,7 +35,6 @@ class MasterRuanganController extends Controller
             'kepala_kantor' => 'nullable',
             'ket' => 'nullable'
         ]);
-        // dd($validated);
         $this->ruang_model->create([
             'nama' => $validated['nama'],
             'penanggung_jawab' => $validated['penanggung_jawab'],
@@ -63,6 +62,15 @@ class MasterRuanganController extends Controller
             'kepala_kantor' => 'nullable',
             'ket' => 'nullable'
         ]);
+        if($validated['penanggung_jawab'] == null || $validated['penanggung_jawab'] == 'Pilih Penanggung Jawab Ruangan'){
+            $validated['penanggung_jawab'] = null;
+        }
+        if($validated['pengurus'] == null || $validated['pengurus'] == 'Pilih Pengurus Ruangan'){
+            $validated['pengurus'] = null;
+        }
+        if($validated['kepala_kantor'] == null  || $validated['kepala_kantor'] == 'Pilih Kepala Kantor'){
+            $validated['kepala_kantor'] = null;
+        }
 
         $data['ruang'] =  $this->ruang_model->findOrFail($validated['id']);
         $data['ruang']->update([

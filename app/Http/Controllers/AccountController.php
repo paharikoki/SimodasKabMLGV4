@@ -39,7 +39,6 @@ class AccountController extends Controller
         }
         $validatedData['password'] = Hash::make($validatedData['password']);
         $user = User::create($validatedData);
-        $user->assignRole($validatedData['level']);
         Alert::toast('Berhasil membuat akun', 'success');
         return redirect('/account-management');
     }
