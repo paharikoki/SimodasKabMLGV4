@@ -41,22 +41,22 @@
 
     <div class="content-wrapper mt-4">
         <div class="box-table">
-            <table id="example" class=" nowrap table" style="width:100%">
+            <table id="transaksiTable" class="nowrap table" style="width:100%">
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Barang</th> <!-- Move this to desired position -->
                         <th>Nama Peminjam</th>
                         <th>Tanggal Pinjam</th>
                         <th>Tanggal Kembali</th>
-                        <th>keperluan</th>
-                        <th>Status</th>
+                        <th>Keperluan</th>
                         <th>Penanggung Jawab</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data['transaksi'] as $key => $item)
-                        {{-- {{dd($item->asset->brand)}} --}}
+                    {{-- @foreach ($data['transaksi'] as $key => $item)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->employee->name }}</td>
@@ -99,10 +99,6 @@
                                         <p class="badge bg-warning text-black">{{ $item->status_text }}</p>
                                     </td>
                             @endswitch
-                            {{-- <td class="text-center">
-                                <p class="badge {{ $item->status == 0 ? 'bg-warning text-black' : 'bg-primary' }}">
-                                    {{ $item->status_text }}</p>
-                            </td> --}}
                             <td>superadmin</td>
                             {{ $item->status_text }}
                             <td>
@@ -121,7 +117,7 @@
                                     href="transaksi-peminjaman/show/{{ $item->id }}">Lihat</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>
@@ -144,6 +140,52 @@
                     $(this).remove();
                 });
             }, 2000);
+
+            $('#transaksiTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "/transaksi-peminjaman", // Your route to the controller
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    }, // No
+                    {
+                        data: 'assets',
+                        name: 'assets'
+                    }, // Assets
+                    {
+                        data: 'employee.name',
+                        name: 'employee.name'
+                    }, // Nama Peminjam
+                    {
+                        data: 'tanggal_peminjaman',
+                        name: 'tanggal_peminjaman'
+                    }, // Tanggal Pinjam
+                    {
+                        data: 'tanggal_pengembalian',
+                        name: 'tanggal_pengembalian'
+                    }, // Tanggal Kembali
+                    {
+                        data: 'keperluan_penggunaan',
+                        name: 'keperluan_penggunaan'
+                    }, // Keperluan
+                    {
+                        data: 'penanggung_jawab',
+                        name: 'penanggung_jawab'
+                    }, // Penanggung Jawab
+                    {
+                        data: 'status',
+                        name: 'status'
+                    }, // Status
+                    {
+                        data: 'action',
+                        name: 'aksi'
+                    } // Aksi
+                ],
+                scrollX: true,
+                info: false,
+                bLengthChange: false,
+            });
         });
     </script>
 @endsection

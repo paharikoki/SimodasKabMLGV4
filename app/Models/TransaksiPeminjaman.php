@@ -38,6 +38,11 @@ class TransaksiPeminjaman extends Model
     public function asset(){
         return $this->belongsTo(Asset::class);
     }
+    // In TransaksiPeminjaman model
+    public function penanggungJawab()
+    {
+        return $this->belongsTo(User::class, 'penanggung_jawab'); // Assuming 'penanggung_jawab' is the foreign key
+    }
 
     public function getFormattedPinjamAttribute()
     {

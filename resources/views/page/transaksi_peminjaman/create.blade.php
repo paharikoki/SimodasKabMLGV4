@@ -50,7 +50,7 @@
                 @endforeach
             </select>
         </div>
-    
+
         <div class="wrap-input">
             <label for="barang">Barang</label>
             <select class="form-select js-example-basic-single" id="barang" aria-label="Default select example" name="barang[]" multiple="multiple" required>
@@ -60,7 +60,7 @@
                 @endforeach --}}
             </select>
         </div>
-        
+
         <div class="wrap-input">
             <label for="date-peminjaman">Tanggal Peminjaman</label>
             <div class="input-group date" id="datepicker-peminjaman-input">
@@ -99,7 +99,7 @@
              <p class="error-message"><i>Konfirmasi password harus sama dengan password</i></p>
         @enderror
         <div class="wrap-right-button">
-            <button  class="button-danger me-2"><a href="/account-management">Batalkan</a></button>
+            <button  class="button-danger me-2"><a href="/transaksi-peminjaman">Batalkan</a></button>
             <button type="submit" class="button-primary">Simpan</button>
         </div>
     </form>
@@ -138,7 +138,7 @@
             $.ajax({
                 url: '/transaksi-peminjaman/getBarangByTahun',
                 type: 'GET',
-                data: { tahun: selectedTahun }, 
+                data: { tahun: selectedTahun },
                 success: function(data) {
                     $('#barang').empty(); // Kosongkan dropdown barang
                     // Tambahkan opsi barang yang baru

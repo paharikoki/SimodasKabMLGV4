@@ -10,6 +10,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Yajra\DataTables\Facades\DataTables;
 
 class TransaksiPeminjamanController extends Controller
 {
@@ -23,11 +24,81 @@ class TransaksiPeminjamanController extends Controller
         $this->asset_model = new Asset();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data['transaksi'] = $this->transaksi_peminjaman_model->with(['asset', 'employee'])->get();
-
+        $data['transaksi'] = $this->transaksi_peminjaman_model->with(['employee'])->get();
+        // Assets id is an array, get the details of the assets
+        foreach ($data['transaksi'] as $transaksi) {
+            $assetDetails = Asset::whereIn('id', $transaksi->assets_id)->get();
+            $transaksi->assets = $assetDetails->toArray();
+        }
         // return response()->json($data['transaksi']);
+        if ($request->ajax()) {
+            return DataTables::of($data['transaksi'])
+                ->addIndexColumn()
+                ->addColumn('assets', function ($transaksi) {
+                    $assetsHtml = '';
+                    $totalAssets = count($transaksi->assets); // Get the total number of assets
+                    $currentIndex = 1; // Initialize index to track the current asset
+
+                    // Loop through the assets array and generate HTML
+                    foreach ($transaksi->assets as $asset) {
+                        // Check if it's the last asset in the array
+                        if ($currentIndex === $totalAssets) {
+                            $assetsHtml .= $asset['item_name'] . ' (' . $asset['item_code'] . ')';
+                        } else {
+                            $assetsHtml .= $asset['item_name'] . ' (' . $asset['item_code'] . '),<br>';
+                        }
+
+                        $currentIndex++; // Increment the current index
+                    }
+
+                    return $assetsHtml;
+                })
+                ->addColumn('status', function ($row) {
+                    $badgeClass = '';
+                    switch ($row->status) {
+                        case 0:
+                            $badgeClass = 'bg-info text-black';
+                            break;
+                        case 1:
+                            $badgeClass = 'bg-secondary';
+                            break;
+                        case 2:
+                            $badgeClass = 'bg-warning';
+                            break;
+                        case 3:
+                            $badgeClass = 'bg-success';
+                            break;
+                        case 4:
+                            $badgeClass = 'bg-danger';
+                            break;
+                        default:
+                            $badgeClass = 'bg-warning text-black';
+                            break;
+                    }
+                    return '<p class="badge ' . $badgeClass . '">' . $row->status_text . '</p>';
+                })
+                ->addColumn('penanggung_jawab', function ($row) {
+                    return $row->penanggungJawab ? $row->penanggungJawab->name : 'Tidak ada Penanggung Jawab'; // Assuming you want to show the 'name' field
+                })
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<td>';
+                    if (auth()->user()->level == 'Administrator') {
+                        $actionBtn .= '<form action="/transaksi-peminjaman/deleted/' . $row->id . '" method="POST" class="d-inline">
+                                    ' . method_field('delete') . csrf_field() . '
+                                    <button class="button-danger" onclick="return confirm(\'Anda yakin menghapus data asset ' . $row->name . ' ?\')">Delete</button>
+                                   </form>
+                                   <a class="button button-primary" href="transaksi-peminjaman/edit/' . $row->id . '">Edit</a>';
+                    }
+                    $actionBtn .= '<a class="button button-warning" href="transaksi-peminjaman/show/' . $row->id . '">Lihat</a>';
+                    $actionBtn .= '</td>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['assets', 'status', 'action'])
+                ->make(true);
+        }
+
         return view('page.transaksi_peminjaman.index', compact('data'));
     }
 
@@ -138,6 +209,7 @@ class TransaksiPeminjamanController extends Controller
             'tanggal_peminjaman' => Carbon::createFromFormat('m/d/Y', $validated['tgl_pinjam'])->format('Y-m-d'),
             'tanggal_pengembalian' => Carbon::createFromFormat('m/d/Y', $validated['tgl_balik'])->format('Y-m-d'),
             'keperluan_penggunaan' => $validated['keperluan'],
+            'penanggung_jawab' => auth()->user()->id,
             'assets_id' => $validated['barang'],
             'status' => $status
 
